@@ -5,7 +5,14 @@ import { bishop_b , bishop_w , king_b , king_w , knight_b , knight_w , pawn_b , 
 const horizontalAxis = ["a", "b", "c", "d", "e", "f", "g", "h"]
 const verticalAxis = ["8", "7", "6", "5", "4", "3", "2", "1"]
 const pieces=[];
-
+const pieceImages = {
+  bishop_b, bishop_w,
+  king_b, king_w,
+  knight_b, knight_w,
+  pawn_b, pawn_w,
+  queen_b, queen_w,
+  rook_b, rook_w
+};
 for (let i=0; i<8 ;i++){
 pieces.push({ image: pawn_b , x:i , y:1});
 }
@@ -13,24 +20,21 @@ pieces.push({ image: pawn_b , x:i , y:1});
 for (let i=0; i<8 ;i++){
 pieces.push({ image: pawn_w , x:i , y:6});
 }
-pieces.push({ image: king_w , x:3 , y:7}); 
-pieces.push({ image: king_b , x:4 , y:0}); 
-pieces.push({ image: queen_w , x:4 , y:7}); 
-pieces.push({ image: queen_b , x:3 , y:0}); 
-pieces.push({ image: bishop_w , x:5 , y:7}); 
-pieces.push({ image: bishop_b , x:2 , y:0});
 
-pieces.push({ image: bishop_b , x:5 , y:0}); 
-pieces.push({ image: bishop_w , x:2 , y:7});
-pieces.push({ image: knight_b , x:6 , y:0}); 
-pieces.push({ image: knight_w , x:1 , y:7});
-pieces.push({ image: knight_w , x:6 , y:7}); 
-pieces.push({ image: knight_b , x:1 , y:0});  
-   
-pieces.push({ image: rook_w , x:0 , y:7}); 
-pieces.push({ image: rook_b , x:0 , y:0});   
-pieces.push({ image: rook_w , x:7 , y:7}); 
-pieces.push({ image: rook_b , x:7 , y:0}); 
+for(let p=0;p<2;p++){
+    const type = p===0? "b" : "w";
+    const y= p===0? 0:7;
+
+  pieces.push({ image: pieceImages[`rook_${type}`], x: 0, y });
+  pieces.push({ image: pieceImages[`knight_${type}`], x: 1, y });
+  pieces.push({ image: pieceImages[`bishop_${type}`], x: 2, y });
+  pieces.push({ image: pieceImages[`queen_${type}`], x: 3, y });
+  pieces.push({ image: pieceImages[`king_${type}`], x: 4, y });
+  pieces.push({ image: pieceImages[`bishop_${type}`], x: 5, y });
+  pieces.push({ image: pieceImages[`knight_${type}`], x: 6, y });
+  pieces.push({ image: pieceImages[`rook_${type}`], x: 7, y });
+}
+
 
 function ChessBoard() {
     let block_name = []
